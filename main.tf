@@ -18,8 +18,15 @@ variable "instance_names" {
 }
 
 resource "aws_s3_bucket" "one" {
-  bucket = "my-project-bucket-123456789"
-  versioning {
-    enabled = true
+  bucket = "my-bucket"
+}
+
+resource "aws_s3_bucket_versioning" "versioning" {
+  bucket = aws_s3_bucket.one.id
+
+  versioning_configuration {
+    status = "Enabled"
+  }
+}
   }
 }
